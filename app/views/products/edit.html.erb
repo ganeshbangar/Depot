@@ -1,0 +1,25 @@
+
+	<h1>Editing</h1>
+	<%= form_for @product, url: { action: 'update'} do |f| %>
+	<p>
+    	<%= f.label :Title %><br />
+    	<%= f.text_field :title %>
+  	</p>
+  	<p>
+    <%= f.label :Description %><br />
+    <%= f.text_field :description %>
+  	</p>
+   
+  	<p>
+    <%= f.label :Image_url %><br />
+    <%= f.text_field :image_url %>
+  	</p>
+  	<p>
+    <%= f.label :Price %><br />
+    <%= f.text_field :price %>
+  	</p>
+  	<p>
+  		<%= f.submit "Update" %>
+  	</p>
+  	<% end %>
+ 
