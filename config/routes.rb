@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :products
   resources :line_items
   resources :carts
+  resources :orders
   
 
   # The priority is based upon order of creation: first created -> highest priority.
