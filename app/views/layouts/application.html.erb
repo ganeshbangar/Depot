@@ -23,10 +23,19 @@
 				<% end %>
 			<% end %>	
 			
-		<a href="http://www...." >Home</a><br />
+		<%= link_to "Home", store_index_path %>
+		<br/>
 		<a href="http://www..../faq" >Questions</a><br />
 		<a href="http://www..../news" >News</a><br />
 		<a href="http://www..../contact" >Contact</a><br />
+		<% if session[:user_id] %>
+			<ul>
+				<li><%= link_to 'Orders', orders_path %></li>
+				<li><%= link_to 'Products', products_path %></li>
+				<li><%= link_to 'Users', users_path %></li>
+			</ul>
+			<%= button_to 'Logout', logout_path, method: :delete %>
+		<% end %>
 		<p><%= Time.now.strftime("%T") %></p>
 		</div>
 			<div id="main" >

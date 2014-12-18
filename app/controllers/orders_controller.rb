@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
 
+	skip_before_action :authorize, only: [:new, :create]
 	def new
 		@cart = current_cart
 		if @cart.line_items.empty?
@@ -20,7 +21,7 @@ class OrdersController < ApplicationController
 	 		if @order.save
 	 			Cart.destroy(session[:cart_id])
 	 			session[:cart_id] = nil
-	 			byebug
+	 			#byebug
 	 			OrderNotifier.received(@order).deliver
 				format.html {redirect_to(store_index_path, notice: 'Thank you for your order')}
  				format.xml { render xml: @order, status: :created, location: @order }

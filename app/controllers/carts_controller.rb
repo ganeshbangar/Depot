@@ -1,4 +1,5 @@
 class CartsController < ApplicationController
+	skip_before_action :authorize, only: [:create, :update, :destroy]
 	def new
 		@cart = Cart.new
 	end
@@ -26,4 +27,11 @@ class CartsController < ApplicationController
 			format.xml { head :ok }
 		end
 	end
+
+	private
+
+	def invalid_cart
+		logger.error "attempt to access invalid cart #{params[:id]}"
+		redirect_to store_index_path, notice: "Invalid cart"
+	end	 
 end

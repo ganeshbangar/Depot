@@ -1,5 +1,6 @@
 class LineItemsController < ApplicationController
 
+	skip_before_action :authorize, only: :create
 	def create
 		@cart = current_cart
 		product = Product.find(params[:product_id])
