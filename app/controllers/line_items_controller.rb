@@ -8,7 +8,7 @@ class LineItemsController < ApplicationController
 		respond_to do |format|
 			if @line_item.save
 				session[:counter] = 0
-				format.html { redirect_to(store_index_path) }
+				format.html { redirect_to(store_path) }
 				format.js {@current_item = @line_item }
 				format.xml { render xml: @line_item, status: :created, location: @line_item }
 			else

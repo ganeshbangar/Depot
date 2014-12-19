@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 	def new
 		@cart = current_cart
 		if @cart.line_items.empty?
-			redirect_to store_index_path, notice: "Your cart is empty."
+			redirect_to store_path, notice: "Your cart is empty."
 			return
 		end
 		@order = Order.new
@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
 	 			session[:cart_id] = nil
 	 			#byebug
 	 			OrderNotifier.received(@order).deliver
-				format.html {redirect_to(store_index_path, notice: 'Thank you for your order')}
+				format.html {redirect_to(store_path, notice: I18n.t(:thanks))}
  				format.xml { render xml: @order, status: :created, location: @order }
 			else 
 				format.html {render action: "new"}	

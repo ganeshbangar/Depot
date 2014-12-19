@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   def show
   	@user = User.find(params[:id])
 	end
@@ -18,8 +17,8 @@ class UsersController < ApplicationController
 			else
 				format.html { render action: 'new'}
 				format.json { render json: @user.errors, status: :unprocessable_entity }	
-			end
-		end		
+			end	
+		end	
 	end
 	
 	def edit
@@ -44,20 +43,24 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		begin
-		byebug
-			@user = User.find(params[:id])
-			@user.destroy
-			flash[:notice] = "User #{@user.name} deleted"
-			rescue StandardError => e
-		
-			flash[:notice] = e.message
-			end
-     redirect_to users_path
-  end    
-					
+    @user = User.find(params[:id])
+    # begin
+    	if @user.id == session[:user_id]
+    		flash[:notice] = "Can't destroy current user"
+    	else	
+      	@user.destroy
+      	flash[:notice] = "User #{@user.name} deleted"
+      end	
+    # rescue StandardError => e
+    #   flash[:notice] = e.message
+    # end
+    respond_to do |format|
+      format.html { redirect_to users_url }
+      format.json { head :no_content }
+    end
+  end
+  				
 	def user_params
     params.require(:user).permit(:name, :password, :password_confirmation)
-  end
-
+  end  
 end
