@@ -35,5 +35,5 @@ class ApplicationController < ActionController::Base
 	end
 
 
-	puts "hello "			
+	puts "hello hiiii"			
 end
